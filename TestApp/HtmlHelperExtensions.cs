@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 using System.Globalization;
+using System.Configuration;
 
 namespace MvcHtmlHelpers
 {
@@ -40,20 +41,12 @@ namespace MvcHtmlHelpers
                     {
                         resources.Scripts.Insert(0, value);
                     }
-                    else
-                    {
-                        throw new HttpException(String.Format("Script already included {0}", value));
-                    }
                 }
                 else if (value.EndsWith(".css"))
                 {
                     if (!resources.Stylesheets.Contains(value))
                     {
                         resources.Stylesheets.Insert(0, value);
-                    }
-                    else
-                    {
-                        throw new HttpException(String.Format("Stylesheet already included {0}", value));
                     }
                 }
             }
@@ -70,7 +63,8 @@ namespace MvcHtmlHelpers
             var server = html.ViewContext.RequestContext.HttpContext.Server;
             var resources = (HtmlResources)html.ViewData["Resources"];
             string result = "";
-            
+
+
             if (resources != null)
             {
                 foreach (string resource in resources.Stylesheets)
@@ -80,7 +74,7 @@ namespace MvcHtmlHelpers
                 }
                 foreach(string resource in resources.Scripts) {
                     DateTime dt = File.GetLastWriteTime(server.MapPath(resource));
-                    result += "<link href=\"" + url.Content(resource) + "?" + String.Format("{0:yyyyddHHss}", dt) + "\" rel=\"stylesheet\" type=\"text/css\" />\n";
+                    result += "<script src=\"" + url.Content(resource) + "?" + String.Format("{0:yyyyddHHss}", dt) + "\" type=\"text/javascript\"></script>\n";
                 }
             }
 
