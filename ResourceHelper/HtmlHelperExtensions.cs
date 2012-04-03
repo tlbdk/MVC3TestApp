@@ -35,8 +35,8 @@ namespace MvcHtmlHelpers
 
     public static class HtmlHelperExtensions
     {
-        private const string scriptsFolder = "~/scripts/"; // TODO: Get from somewhere else!
-        private const string cssFolder = "~/content/"; // TODO: Get from somewhere else!
+        private const string scriptsFolder = "~/Scripts/"; // TODO: Get from somewhere else!
+        private const string cssFolder = "~/Content/"; // TODO: Get from somewhere else!
 
         public static MvcHtmlString Resource(this HtmlHelper html, string value)
         {
@@ -56,8 +56,9 @@ namespace MvcHtmlHelpers
                     if (!resources.Scripts.Contains(value))
                     {
                         // Note the latest date a file was changed.
-                        if (DateTime.Compare(resources.LatestScriptFile, info.LastWriteTime) < 0)
+                        if (DateTime.Compare(resources.LatestScriptFile, info.LastWriteTime) < 0) {
                             resources.LatestScriptFile = info.LastWriteTime;
+                        }
 
                         // Minify the script file if necessary.
                         if (resources.Minify)
@@ -70,7 +71,9 @@ namespace MvcHtmlHelpers
                             }
                             else if (File.Exists(server.MapPath(scriptsFolder + origname + ".min" + info.Extension)) && DateTime.Compare(File.GetLastWriteTime(server.MapPath(scriptsFolder + origname + ".min" + info.Extension)), info.LastWriteTime) >= 0)
                             {
-                                resources.LatestScriptFile = File.GetLastWriteTime(server.MapPath(scriptsFolder + origname + ".min" + info.Extension));
+                                if (DateTime.Compare(resources.LatestScriptFile, info.LastWriteTime) < 0) {
+                                    resources.LatestScriptFile = File.GetLastWriteTime(server.MapPath(scriptsFolder + origname + ".min" + info.Extension));
+                                }
                                 // We have already minified the file. Skip.
                                 resources.Scripts.Insert(0, scriptsFolder + origname + ".min" + info.Extension);
                             }
