@@ -74,7 +74,6 @@ namespace TestRunner
             }
 
             Console.WriteLine("{0} tests. {1} failed", nTests, nFailedTests, "Unit test results");
-            Console.ReadKey();
         }
 
     }
