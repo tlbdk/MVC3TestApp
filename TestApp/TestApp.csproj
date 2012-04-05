@@ -41,8 +41,11 @@
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="ResourceHelper">
-      <HintPath>..\packages\ResourceHelper.1.0.1\lib\40\ResourceHelper.dll</HintPath>
+      <HintPath>..\packages\ResourceHelper.1.0.2\lib\40\ResourceHelper.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -116,6 +119,8 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\JsValidator\config.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Web.config" />
@@ -184,4 +189,9 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+"$(SolutionDir)packages\JsValidator.0.52.4\tools\jsvalidator.exe" "$(ProjectDir)Scripts\jsvalidator\config.js"
+</PostBuildEvent>
+  </PropertyGroup>
 </Project>
