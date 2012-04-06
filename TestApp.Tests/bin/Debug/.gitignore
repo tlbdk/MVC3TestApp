@@ -4,3 +4,5 @@
 *.pdb
 *.config
 *.manifest
+
+*.log

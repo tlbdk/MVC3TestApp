@@ -5,6 +5,7 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
 using System.Diagnostics;
 
@@ -20,8 +21,9 @@ namespace TestApp.Tests.Controllers
 	    public void Setup()
 	    {
             // Link to fix this driver:  http://www.tomdupont.net/2011/10/use-internetexplorerdriver-for.html
-		    //driver = new InternetExplorerDriver();
-            driver = new FirefoxDriver();
+		    driver = new InternetExplorerDriver();
+            //driver = new FirefoxDriver();
+            //driver = new ChromeDriver();
 	    }
 	    
 	    [TearDown]
